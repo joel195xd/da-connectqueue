@@ -1,32 +1,57 @@
 Config = {}
 
--- Server Slot Limit
-Config.Slots = 64
+-- [[ SERVER SLOTS ]]
+Config.DynamicSlots = {
+    enabled = true,
+    default = 30,
+    max = 64
+}
 
--- Whitelist Settings
+-- [[ RESERVED SLOTS ]]
+-- These slots are kept free for priority players if the server is nearly full
+Config.ReservedSlots = 4 
+
+-- [[ DISCORD INTEGRATION ]]
+-- Set to false if you don't want to use Discord features
+Config.Discord = {
+    enabled = false, -- Enable this and fill the fields below
+    webhook = "YOUR_WEBHOOK_URL",
+    token = "YOUR_BOT_TOKEN",
+    guildId = "YOUR_GUILD_ID",
+    roles = {
+        ["1234567890"] = 10, -- Role ID = Priority Level
+        ["0987654321"] = 5,
+    }
+}
+
+-- [[ WHITELIST SETTINGS ]]
 Config.WhitelistEnabled = false
 Config.Whitelist = {
     -- ["license:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"] = true,
 }
 
--- Priority Settings (Higher number = Higher priority)
--- Default priority is 0
+-- [[ PRIORITY SETTINGS ]]
 Config.Priority = {
-    -- ["license:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"] = 10, -- Admin/VIP
+    -- ["license:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"] = 15,
 }
 
--- Grace Period in seconds (allows players who crashed/disconnected to skip the queue)
-Config.GracePeriod = 300 -- 5 minutes
+-- [[ GRACE PERIOD ]]
+-- Seconds to allow reconnecting after a crash
+Config.GracePeriod = 300 
 
--- Update interval in milliseconds (how often to update the queue message for waiting players)
+-- [[ QUEUE SETTINGS ]]
 Config.UpdateInterval = 5000
 
--- Language / Messages
+-- [[ MESSAGES ]]
 Config.Messages = {
     whitelist_only = "This server is currently whitelist only.",
     server_full = "Server is full. You are in the queue.",
-    queue_pos = "\nPosition: %d / %d\nPriority: %d\n\n[DA Scripts - Connect Queue]",
+    queue_pos = "\nPosition: %d / %d\nPriority: %d\nEstimated Wait: %s\n\n[DA Scripts - Connect Queue]",
     grace_period = "Reconnecting... Welcome back!",
     connecting = "Connecting to the server...",
-    error_id = "Error: Could not find your identifiers. Please restart Steam/FiveM."
+    error_id = "Error: Could not find your identifiers. Please restart Steam/FiveM.",
+    no_perms = "You do not have permission to use this command.",
+    reload_success = "Queue configuration reloaded successfully.",
+    whitelist_add = "Player %s added to whitelist.",
+    whitelist_remove = "Player %s removed from whitelist.",
 }

@@ -1,52 +1,60 @@
-# DA Connect Queue (Standalone)
+# DA Connect Queue (Advanced Standalone)
 
 ![DA Scripts](https://via.placeholder.com/800x200?text=DA+Scripts+-+Connect+Queue)
 
-A professional, standalone connection queue system for FiveM. This script manages player connections, ensuring that the server doesn't exceed its slot limit while providing a fair queuing system based on priority levels and whitelist status.
+A professional, advanced standalone connection queue system for FiveM. This script manages player connections with high-end features like Discord role integration, dynamic slots, and admin controls.
 
 Made with ❤️ by **DA Scripts**.
 
-## 🚀 Features
+## 🚀 Advanced Features
 
 - **Standalone:** No dependencies on ESX, QBCore, or any other framework.
-- **Priority System:** Assign higher priority levels to specific players (Admins, VIPs, etc.) to skip ahead in the queue.
-- **Whitelist System:** Optional whitelist mode based on player identifiers (License, Steam, Discord, etc.).
-- **Grace Period:** Allows players who recently disconnected or crashed to skip the queue if they reconnect within a certain timeframe.
-- **Highly Configurable:** Easy-to-use `config.lua` for all settings and messages.
-- **Optimized:** Efficient deferral handling with regular updates to waiting players.
+- **Discord Integration:**
+  - **Role-based Priority:** Automatically assign priority levels based on Discord roles.
+  - **Webhook Logs:** Real-time logging of queue entries and connections to Discord.
+- **Dynamic Slot Management:** Start with a default number of slots and adjust them dynamically.
+- **Reserved Slots:** Keep specific slots free for priority players (Staff/VIP) even when the server is "full" for regular players.
+- **Priority System:** Multiple levels of priority via identifiers or Discord roles.
+- **Estimated Wait Time (ETA):** Calculates and displays the estimated time until connection.
+- **Admin Commands:** Manage the queue, whitelist, and slots in-real-time.
+- **Grace Period:** Instant reconnection for players who recently crashed.
 
 ## 🛠️ Installation
 
 1. Download or clone this repository.
 2. Extract the `da-connectqueue` folder into your FiveM `resources` directory.
 3. Open your `server.cfg` and add:
-   ```cfg
-   ensure da-connectqueue
-   ```
-4. (Optional) Configure the settings in `config.lua`.
+
+```cfg
+ensure da-connectqueue
+```
+
+4. Configure the settings in `config.lua`.
+5. (Optional) For Discord features, provide your Bot Token and Guild ID.
 
 ## ⚙️ Configuration
 
-The `config.lua` file allows you to customize almost every aspect of the queue:
+The `config.lua` file is now more powerful:
 
-- `Config.Slots`: Set your server's max slots (e.g., 64).
-- `Config.WhitelistEnabled`: Set to `true` to enable whitelist-only mode.
-- `Config.Whitelist`: Add player licenses to the whitelist.
-- `Config.Priority`: Assign priority levels (higher numbers rank higher in the queue).
-- `Config.GracePeriod`: Number of seconds a player has to reconnect without queuing.
-- `Config.Messages`: Customize all in-game messages and queue status text.
+- `Config.DynamicSlots`: Define `default` and `max` slots.
+- `Config.ReservedSlots`: Number of slots reserved for priority players.
+- `Config.Discord`: Webhook URL, Bot Token, and Role mappings.
+- `Config.WhitelistEnabled`: Toggle whitelist mode.
+- `Config.Priority`: Manual priority based on licenses.
+- `Config.GracePeriod`: Time allowed for quick reconnection.
 
-### Example Priority Config
-```lua
-Config.Priority = {
-    ["license:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"] = 10, -- Super Admin
-    ["license:yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"] = 5,  -- VIP Player
-}
-```
+## ⌨️ Admin Commands
+
+Use these commands to manage the queue (requires `command.creload`, `command.cwhitelist`, etc. ace permissions):
+
+- `/c-reload`: Reloads `config.lua` without restarting the resource.
+- `/c-info`: Displays current queue status and slot usage.
+- `/c-whitelist [add/remove] [license]`: Manage the whitelist.
+- `/c-slots [number]`: Change the dynamic slot limit on the fly.
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details (or feel free to use it as you wish, just keep the credits!).
+This project is licensed under the MIT License - feel free to use it, just keep the credits to **DA Scripts**.
 
 ---
 
